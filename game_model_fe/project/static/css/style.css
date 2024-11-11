@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    grid-template-rows: repeat(9, 50px);
+    gap: 2px;
+    margin: 20px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.team1 {
+    color: blue;
+}
+
+.team2 {
+    color: red;
+}
+
+/* 移動可能範囲を薄緑にハイライト */
+.highlight {
+    background-color: lightgreen;
+}
+
+/* 攻撃可能範囲を赤にハイライト */
+.attackable {
+    background-color: lightcoral;
+}
+
+/* 選択された駒を強調 */
+.selected-unit {
+    border: 2px solid yellow;
+}
+
+#status-display {
+    margin-top: 10px;
+}
+
+/* 選択されたユニットを薄緑で表示 */
+.selected-unit {
+    background-color: rgba(144, 238, 144, 0.6); /* 薄緑 */
+}
