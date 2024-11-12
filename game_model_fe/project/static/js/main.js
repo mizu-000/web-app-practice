@@ -2,7 +2,7 @@ import { initializeBoard, placeUnits, renderBoard } from './board.js';
 import { moveUnit, findUnit, resetMoves, isMovable } from './unit.js';
 import { highlightMovableCells, clearHighlights, highlightMovableUnits, highlightAttackableCells } from './highlight.js';
 import { attack, promptAttackTarget, getEnemiesInAttackRange, isAttackable } from './attack.js';
-import { displayStatus } from './statusDisplay.js';
+import { displayStatus, updateMessageDisplay } from './statusDisplay.js';
 
 let currentPlayer = 1;
 let team1Units = [];
@@ -29,6 +29,7 @@ function onCellClick(e) {
             selectedUnit = null;
             clearHighlights();
             displayStatus(null);
+            highlightMovableUnits(currentPlayer === 1 ? team1Units : team2Units);
         } else if (unit) {
             selectedUnit = unit;
             displayStatus(unit);
@@ -42,9 +43,10 @@ function onCellClick(e) {
                 renderBoard([...team1Units, ...team2Units]);
                 const enemiesInRange = getEnemiesInAttackRange(selectedUnit, currentPlayer === 1 ? team2Units : team1Units);
                 if (enemiesInRange.length > 0) {
-                    promptAttackTarget(selectedUnit, enemiesInRange, team1Units, team2Units); // 攻撃対象を選択後、即座に再描画
+                    promptAttackTarget(selectedUnit, enemiesInRange,team1Units, team2Units);
                 }
                 selectedUnit = null;
+                highlightMovableUnits(currentPlayer === 1 ? team1Units : team2Units);
             }
         }
     } else if (unit) {
@@ -54,6 +56,7 @@ function onCellClick(e) {
         highlightMovableCells(selectedUnit);
         highlightAttackableCells(selectedUnit);
     }
+    
 }
 
 // ターンの終了
@@ -63,19 +66,18 @@ function endTurn() {
     selectedUnit = null;
 
     resetMoves(currentPlayer === 1 ? team1Units : team2Units);
-
-    alert(`チーム${currentPlayer}のターンです`);
+    updateMessageDisplay(`チーム${currentPlayer}のターンです`);
     renderBoard([...team1Units, ...team2Units]);
     highlightMovableUnits(currentPlayer === 1 ? team1Units : team2Units);
 }
 
 // 初期化処理
 initializeBoard(onCellClick);
-placeUnits(['infantry', 'archer', 'cavalry', 'king', 'infantry', 'archer'], 1, team1Units, unitData);
-placeUnits(['infantry', 'archer', 'cavalry', 'king', 'infantry', 'archer'], 2, team2Units, unitData);
+placeUnits(['cavalry','infantry', 'archer', 'king', 'archer', 'infantry','cavalry'], 1, team1Units, unitData);
+placeUnits(['cavalry','infantry', 'archer', 'king', 'archer', 'infantry','cavalry'], 2, team2Units, unitData);
 
 document.getElementById('end-turn-button').addEventListener('click', endTurn);
 
 renderBoard([...team1Units, ...team2Units]);
 highlightMovableUnits(team1Units);
-alert(`チーム${currentPlayer}のターンです`);
+updateMessageDisplay(`チーム${currentPlayer}のターンです`);

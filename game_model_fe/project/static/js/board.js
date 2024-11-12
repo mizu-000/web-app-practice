@@ -32,13 +32,16 @@ export function renderBoard(units) {
 
 // チームの駒をボードに配置
 export function placeUnits(unitTypes, team, teamUnits, unitData) {
-    const startRow = team === 1 ? 0 : 8;
-    const direction = team === 1 ? 1 : -1;
-
     unitTypes.forEach((type, index) => {
-        const row = startRow;
-        const col = index;
-        const unit = { ...unitData[type], row, col, type, team, moved: false };
+        const row = team === 1 ? 0 : 8; // 例えば、チーム1を上段に、チーム2を下段に配置
+        const col = index +1; // 2マス間隔で配置
+        const unit = {
+            ...unitData[type],
+            type,
+            row,
+            col,
+            team : team // チーム情報を追加
+        };
         teamUnits.push(unit);
     });
 }

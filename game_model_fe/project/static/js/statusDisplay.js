@@ -13,3 +13,8 @@ export function displayStatus(unit) {
         statusDisplay.innerHTML = "ユニットが選択されていません";
     }
 }
+
+export function updateMessageDisplay(message) {
+    const messageDisplay = document.getElementById("message-display");
+    messageDisplay.textContent = message;
+}

@@ -8,14 +8,26 @@ export function attack(attacker, defender, team1Units, team2Units) {
 
     if (defender.hp <= 0) {
         alert(`${defender.type} が倒されました！`);
-        // ユニットをチームから削除
-        const team = defender.team === 1 ? team1Units : team2Units;
-        const index = team.indexOf(defender);
-        if (index !== -1) {
-            team.splice(index, 1);  // ユニットを削除
+        console.log("Defenderオブジェクト:", defender);
+console.log("Defenderのチーム:", defender.team);
+console.log("チーム1のユニット一覧:", team1Units);
+console.log("チーム2のユニット一覧:", team2Units);
+
+        // チームを確認してユニットを削除
+        const team = defender.team === 1 ? team1Units : defender.team === 2 ? team2Units : null;
+        if (team !== null) {
+            const index = team.indexOf(defender);
+            if (index !== -1) {
+                team.splice(index, 1);  // ユニットを削除
+                renderBoard([...team1Units, ...team2Units]); // ボードを再描画
+            } else {
+                console.error("ユニットがチームから見つかりませんでした。");
+            }
+        } else {
+            console.error("不明なチームです。defenderにteamプロパティが設定されていることを確認してください。");
         }
-        // ユニット削除後にボードを再描画して即座に反映
-        renderBoard([...team1Units, ...team2Units]);
+    } else {
+        renderBoard([...team1Units, ...team2Units]); // ボードを再描画
     }
 }
 

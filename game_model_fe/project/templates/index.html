@@ -3,14 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9*9戦略ゲーム</title>
+    <title>9x9 戦略ゲーム</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div id="game-board"></div>
-    <div id="status-display"></div>
-    <button id="end-turn-button">ターン終了</button>
-    <div id="status-display">ステータスがここに表示されます</div>
+    <div id="game-container">
+        <!-- メッセージ表示エリア -->
+        <div id="message-display">ゲームメッセージがここに表示されます</div>
+
+        <!-- ゲームボードエリア -->
+        <div id="game-board"></div>
+
+        <!-- ステータス表示エリア -->
+        <div id="status-display">ユニットのステータスがここに表示されます</div>
+
+        <!-- コントロールエリア -->
+        <button id="end-turn-button">ターン終了</button>
+    </div>
+
     <script type="module" src="/static/js/main.js"></script>
 </body>
 </html>
