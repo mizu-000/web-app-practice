@@ -2,9 +2,14 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#game-container {
+#container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+#game-container {
+    display: flex;   
     align-items: center;
     margin: 20px;
 }
@@ -19,6 +24,24 @@ body {
     border: 3px solid #333;
 }
 
+#unit-list {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    width: 150px;
+}
+
+.unit-list {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.unit-list div {
+    margin-bottom: 8px; /* 各ユニットの間隔を広げる */
+    font-size: 14px;
+    color: inherit;
+}
 .cell {
     width: 50px;
     height: 50px;

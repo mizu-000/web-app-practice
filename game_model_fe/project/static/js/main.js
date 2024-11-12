@@ -16,6 +16,18 @@ const unitData = {
     king: { hp: 20, attack: 20, defense: 8, range: 1, move: 2, icon: '👑' },
 };
 
+function updateUnitList() {
+    const team1List = document.getElementById('team1-unit-list');
+    const team2List = document.getElementById('team2-unit-list');
+
+    team1List.innerHTML = team1Units
+        .map(unit => `<div>${unit.icon}: HP ${unit.hp}</div>`)
+        .join('');
+    team2List.innerHTML = team2Units
+        .map(unit => `<div>${unit.icon}: HP ${unit.hp}</div>`)
+        .join('');
+}
+
 // セルクリック時のイベント
 function onCellClick(e) {
     const cell = e.currentTarget;
@@ -46,6 +58,7 @@ function onCellClick(e) {
                     promptAttackTarget(selectedUnit, enemiesInRange,team1Units, team2Units);
                 }
                 selectedUnit = null;
+                updateUnitList();  // ユニットリストを更新
                 highlightMovableUnits(currentPlayer === 1 ? team1Units : team2Units);
             }
         }
@@ -81,3 +94,4 @@ document.getElementById('end-turn-button').addEventListener('click', endTurn);
 renderBoard([...team1Units, ...team2Units]);
 highlightMovableUnits(team1Units);
 updateMessageDisplay(`チーム${currentPlayer}のターンです`);
+updateUnitList(); 

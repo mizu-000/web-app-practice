@@ -7,12 +7,23 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div id="game-container">
+    <div id="container">
         <!-- メッセージ表示エリア -->
         <div id="message-display">ゲームメッセージがここに表示されます</div>
+        
+        <div id="game-container">
+            <div id="unit-list">
+                <h3>チーム1ユニット</h3>
+                <div id="team1-unit-list"></div>
+            </div>
+            <!-- ゲームボードエリア -->
+            <div id="game-board"></div>
 
-        <!-- ゲームボードエリア -->
-        <div id="game-board"></div>
+            <div id="unit-list">
+                <h3>チーム2ユニット</h3>
+                <div id="team2-unit-list"></div>
+            </div>
+        </div>
 
         <!-- ステータス表示エリア -->
         <div id="status-display">ユニットのステータスがここに表示されます</div>
