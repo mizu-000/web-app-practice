@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お気に入りリスト</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <a href="{{ url_for('index') }}">戻る</a>
+    <h1>📚 お気に入りリスト</h1>
+    <ul>
+        {% for favorite in favorites %}
+        <li>
+            <h3>{{ favorite[0] }}</h3>
+            <p><strong>著者:</strong> {{ favorite[1] }}</p>
+            <p><strong>出版日:</strong> {{ favorite[2] }}</p>
+            <p>{{ favorite[3] }}</p>
+            <button onclick="deleteFavorite('{{ favorite[0] }}')">❌ 削除</button>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- JavaScript ファイルを読み込む -->
+    <script src="/static/js/favorites.js"></script>
+</body>
+</html>

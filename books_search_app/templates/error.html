@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エラーメッセージ</title>
+    <script>
+        // 5秒後にリダイレクト
+        setTimeout(() => {
+            window.location.href = "{{ url_for('login') }}";
+        }, 5000);
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .message {
+            font-size: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="msg">
+        {{ msg }}
+    </div>
+    <p>5秒後にログイン画面になります...</p>
+</body>
+</html>
