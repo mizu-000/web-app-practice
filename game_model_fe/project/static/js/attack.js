@@ -1,7 +1,9 @@
 // attack.js
 import { renderBoard } from './board.js';
+let gameOver = false; // 勝敗判定フラグ
 
 export function attack(attacker, defender, team1Units, team2Units) {
+    if (gameOver) return; // ゲーム終了後は無効
     const damage = Math.max(0, attacker.attack - defender.defense);
     defender.hp -= damage;
     alert(`${attacker.type} が ${defender.type} に ${damage} のダメージを与えた！`);
@@ -9,9 +11,17 @@ export function attack(attacker, defender, team1Units, team2Units) {
     if (defender.hp <= 0) {
         alert(`${defender.type} が倒されました！`);
         console.log("Defenderオブジェクト:", defender);
-console.log("Defenderのチーム:", defender.team);
-console.log("チーム1のユニット一覧:", team1Units);
-console.log("チーム2のユニット一覧:", team2Units);
+        // 勝敗判定処理
+        if (defender.type === 'king') {
+            const winner = defender.team === 1 ? 'チーム2' : 'チーム1';
+            alert(`${winner}の勝利です！`);
+            gameOver = true;
+            setupResetOnClick(); // ゲームリセット準備
+            return;
+        }
+        console.log("Defenderのチーム:", defender.team);
+        console.log("チーム1のユニット一覧:", team1Units);
+        console.log("チーム2のユニット一覧:", team2Units);
 
         // チームを確認してユニットを削除
         const team = defender.team === 1 ? team1Units : defender.team === 2 ? team2Units : null;
@@ -56,4 +66,15 @@ export function isAttackable(row, col, unit) {
     const range = unit.range;
     const distance = Math.abs(row - unit.row) + Math.abs(col - unit.col);
     return distance <= range;
+}
+
+// ゲームリセットのクリック設定
+function setupResetOnClick() {
+    document.body.addEventListener('click', resetGame, { once: true });
+}
+
+// ゲームリセット処理
+function resetGame() {
+    gameOver = false; // 勝敗フラグ解除
+    location.reload(); // ページをリロードしてリセット
 }
